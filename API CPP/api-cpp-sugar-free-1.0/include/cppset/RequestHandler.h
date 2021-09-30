@@ -23,6 +23,10 @@ class RequestHandler
             //deserialize from standard input
             nlohmann::json requestData;
             
+            //Intenta obtener la información y almancenarla dentro de requestData, pero en el caso de que no se pueda
+            //se crea una respuesta de excepción, la cual luego se imprime en pantalla, imprimiendo también una línea que 
+            //especifica que se espera una respuesta de tipo JSON y la codificación de utf-8. Luego se finaliza la funcion.
+            //En caso de que se haya obtenido una respuesta, ésta será retornada por la función.
             try
             {
                 std::cin >> requestData;
@@ -40,7 +44,7 @@ class RequestHandler
                             };
                std::cout << "Content-type:application/json; charset=utf-8\r\n\r\n";
                std::cout << exception_response; 
-               exit (EXIT_FAILURE);            
+               exit (EXIT_FAILURE);     //EXIT_FAILURE corresponde a la stdlib.h, y su valor es de 1       
             }
 
             return requestData;
@@ -51,6 +55,13 @@ class RequestHandler
         
         virtual ~RequestHandler(){}
 
+
+        //Inicializa un puntero inteligente de iniReader, para luego llamar a su método open pasándole el nombre del
+        //archivo 'configuration.ini' (que contiene información de configuración), y luego se crea un string para obtener
+        //de la sección "GENERAL" del iniReader, el valor de "servicesPath". Luego se crea una variable tipo JSON para almacenar
+        //la respuesta que retorna el método getRequestData. A continuación, se crea un string para almacenar el valor de 'servicio'
+        //dentro de la respuesta obtenida. También se crean punteros inteligentes, de ComponentFactory y de IService y luego se llama
+        //al método call pasándole la respuesta obtenida previamente.
         void handle()
         {
             std::shared_ptr<IniReader> iniReader( new IniReader() );

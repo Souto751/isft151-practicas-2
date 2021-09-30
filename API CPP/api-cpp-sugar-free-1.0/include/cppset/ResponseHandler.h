@@ -41,6 +41,9 @@ class ResponseHandler
         //     this->data = data;
         // }
 
+
+        //Regresa un mensaje a la web, retornando una línea de cabezera, y a continuación la respuesta obtenida.
+        //La primer línea, no aparece en la página, pero establece que el formato a recibir es JSON y la codificación es utf-8
         virtual void handle(nlohmann::json responseData)
         {
             std::cout << "Content-type:application/json; charset=utf-8\r\n\r\n";

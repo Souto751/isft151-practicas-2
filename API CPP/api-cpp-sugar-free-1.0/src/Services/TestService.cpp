@@ -17,6 +17,7 @@ class TestService : public IService
         std::shared_ptr<ResponseHandler> responseHandler;
 
         //SERVICES ACTIONS:
+        //Cada acción retorna un JSON, conteniendo información relacionada a la acción seleccionada.
         void create()
         {
             std::string service = this->data["service"];
@@ -79,6 +80,9 @@ class TestService : public IService
             this->responseHandler = std::make_shared<ResponseHandler>();
         }
 
+        //Mediante el método call, se recibe un json como parámetro, el cual se almacena en el atributo data,
+        //y luego en una nueva variable se almacena la propiedad action de data, para ser comparada con diversas
+        //acciones que podrían realizarse y, si es en algún caso correcto, ejecutar el método correspondiente.
         void call(nlohmann::json data)
         {
             this->data = data;
