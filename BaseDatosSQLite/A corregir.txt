@@ -1,0 +1,3 @@
+year no va en subject y cambiarle el nombre a ciclo lectivo
+
+revisar relaciones (una a muchos en vez de 1 a 1)
